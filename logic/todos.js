@@ -1,7 +1,10 @@
+import { constants } from "zlib";
+
 export const ADD_ITEM = 'qgo/assessment/ADD_ITEM';
 export const REMOVE_ITEM = 'qgo/assessment/REMOVE_ITEM';
 export const TOGGLE_COMPLETE = 'qgo/assessment/TOGGLE_COMPLETE';
 export const SHOW_COMPLETE_ITEMS = 'qgo/assessment/SHOW_COMPLETE_ITEMS';
+export const SHOW_INCOMPLETE_ITEMS = 'qgo/assessment/SHOW_INCOMPLETE_ITEMS';
 
 export const addItem = (content) => {
   return { type: ADD_ITEM, content };
@@ -17,12 +20,18 @@ export const toggleComplete = ({itemId}) => {
   return {
     type: TOGGLE_COMPLETE,
     itemId
-  }
-}
+  };
+};
 
 export const showCompleteItems = () => {
   return {
     type: SHOW_COMPLETE_ITEMS,
+  };
+};
+
+export const showIncompleteItems = () => {
+  return {
+    type: SHOW_INCOMPLETE_ITEMS,
   }
 }
 
@@ -31,7 +40,7 @@ export const initialState = {
     { id: 1, content: 'Call mum', completed: false },
     { id: 2, content: 'Buy cat food', completed: false },
     { id: 3, content: 'Water the plants', completed: false },
-  ],
+  ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,11 +76,16 @@ const reducer = (state = initialState, action) => {
            };
          })  
       };
-      case SHOW_COMPLETE_ITEMS: 
-    return {
-      ...state,
-      items: [...state.items.filter(({completed}) => completed === true )]
-    }
+    case SHOW_COMPLETE_ITEMS:
+      return {
+        ...state,
+        items: [...state.items.filter(({completed}) => completed === true )]
+      };
+    case SHOW_INCOMPLETE_ITEMS: 
+      return {
+        ...state,
+        items: [...state.items.filter(({completed}) => completed === false )]
+      };
     default:
       return state;
   }
