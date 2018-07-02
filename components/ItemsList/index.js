@@ -7,8 +7,11 @@ import './styles.css';
 export const ItemsList = ({ items, onRemoveItem, onToggleComplete, onShowCompleteItems, onShowIncompleteItems }) => {
   return (
     <div>
-    <button onClick={() => onShowCompleteItems()}>show complete</button>
-    <button onClick={() => onShowIncompleteItems()}>show incomplete</button>
+      <div className="button-group">
+          <button onClick={() => onShowCompleteItems()}>show complete</button>
+          <button onClick={() => onShowIncompleteItems()}>show incomplete</button> 
+      </div>
+   
       <ul className="itemsList-ul">
         {items.length < 1 && <p id="items-missing">Add some tasks above.</p>}
         {items.map((item) => 
@@ -23,8 +26,12 @@ export const ItemsList = ({ items, onRemoveItem, onToggleComplete, onShowComplet
 };
 
 ItemsList.propTypes = {
-  items: PropTypes.array.isRequired,
-};
+  items: PropTypes.array,
+  onRemoveItem: PropTypes.func,
+  onToggleComplete: PropTypes.func,
+  onShowCompleteItems: PropTypes.func,
+  onShowIncompleteItems: PropTypes.func
+}.isRequired;
 
 const mapStateToProps = (state) => {
   return { items: state.todos.items };

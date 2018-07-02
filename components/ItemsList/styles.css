@@ -5,3 +5,12 @@
 .itemsList-ul li {
   padding: 5px;
 }
+
+.button-group {
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.button-group button {
+  margin-left: 10px;
+}
