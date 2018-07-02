@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removeItem, toggleComplete } from '../../logic/todos';
+import { removeItem, toggleComplete, showCompleteItems } from '../../logic/todos';
 import './styles.css';
 
-export const ItemsList = ({ items, onRemoveItem, onToggleComplete }) => {
+export const ItemsList = ({ items, onRemoveItem, onToggleComplete, onShowCompleteItems }) => {
   return (
     <div>
+    <button onClick={onShowCompleteItems}>show complete</button>
       <ul className="itemsList-ul">
         {items.length < 1 && <p id="items-missing">Add some tasks above.</p>}
         {items.map((item) => 
@@ -31,7 +32,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return { 
     onRemoveItem: (id) => dispatch(removeItem({itemId:id})),
-    onToggleComplete: (id) => dispatch(toggleComplete({itemId:id}))
+    onToggleComplete: (id) => dispatch(toggleComplete({itemId:id})),
+    onShowCompleteItems:  () => dispatch(showCompleteItems())
   }
 };
 
