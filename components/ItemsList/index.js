@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removeItem } from '../../logic/todos';
+import { removeItem, toggleComplete } from '../../logic/todos';
 import './styles.css';
 
-export const ItemsList = ({ items, onRemoveItem }) => {
+export const ItemsList = ({ items, onRemoveItem, onToggleComplete }) => {
   return (
     <div>
       <ul className="itemsList-ul">
@@ -13,6 +13,7 @@ export const ItemsList = ({ items, onRemoveItem }) => {
         <li key={item.id}>
           <a onClick={() => onRemoveItem(item.id)}>x </a>
           {item.content}
+          <input type="checkbox"  onClick={() => onToggleComplete(item.id)} />
         </li>)}
       </ul>
     </div>
@@ -30,6 +31,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return { 
     onRemoveItem: (id) => dispatch(removeItem({itemId:id})),
+    onToggleComplete: (id) => dispatch(toggleComplete({itemId:id}))
   }
 };
 
