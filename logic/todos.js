@@ -6,11 +6,10 @@ export const addItem = (content) => {
 };
 
 export const removeItem = ({itemId}) => {
-  return { 
-    type: REMOVE_ITEM,
-    itemId
-  }
-}
+  return {
+     type: REMOVE_ITEM, itemId
+    };
+};
 
 export const initialState = {
   items: [
@@ -34,11 +33,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         items: [...state.items, newItem],
       };
-    case REMOVE_ITEM: 
+    case REMOVE_ITEM:
       return {
-          ...state,
-         items: [...state.items.filter(({id}) => id !== action.itemId)]
-        };
+        ...state,
+       items: [...state.items.filter(({id}) => id !== action.itemId)]
+      };
     default:
       return state;
   }
